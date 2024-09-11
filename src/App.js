@@ -1,13 +1,13 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { fetch } from '@cloudflare/pages-functions';
+import axios from 'axios';
 
 function App() {
   const [totalViews, setTotalViews] = useState(0);
 
   useEffect(() => {
-    fetch('/increment-view-count')
-      .then((res) => res.json())
+    axios.get('/increment-view-count')
+      .then((res) => res.data)
       .then((data) => setTotalViews(data.totalViews));
   }, []);
 
