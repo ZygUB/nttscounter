@@ -3,7 +3,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 
 function App() {
-  const [totalViews, setTotalViews] = useState(() => {
+  const [totalViews] = useState(() => {
     const storedViews = localStorage.getItem('totalViews');
     return storedViews ? parseInt(storedViews) + 1 : 1;
   })
