@@ -1,16 +1,16 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import { fetch } from '@cloudflare/pages-functions';
 
 function App() {
-  const [totalViews] = useState(() => {
-    const storedViews = localStorage.getItem('totalViews');
-    return storedViews ? parseInt(storedViews) + 1 : 1;
-  })
+  const [totalViews, setTotalViews] = useState(0);
 
   useEffect(() => {
-    localStorage.setItem('totalViews', totalViews);
-  }, [totalViews]);
-  
+    fetch('/increment-view-count')
+      .then((res) => res.json())
+      .then((data) => setTotalViews(data.totalViews));
+  }, []);
+
   return (
     <div className="App">
       <h1>Welcome to NTTS Fans Visitor Website</h1>
@@ -18,4 +18,4 @@ function App() {
     </div>
   );
 }
-export default App
+export default App;
